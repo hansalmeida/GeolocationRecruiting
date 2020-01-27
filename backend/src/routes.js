@@ -1,9 +1,6 @@
-const express = require("express")
+const { Router } = require("express")
 
-const app = express()
-
-// This will make Express understand JSON data.
-app.use(express.json())
+const route = Router()
 
 /**
  * Routes
@@ -13,9 +10,8 @@ app.use(express.json())
  * request.params (localhost/:id/ == localhost/1/)
  * request.body usually info sent from a <form>
  */
-app.get("/", (request, response) => {
+route.get("/", (request, response) => {
   return response.json({ message: "ハンスです！宜しくお願い致します！" })
 })
 
-// Port that express will be listening to
-app.listen(3333)
+module.exports = route
