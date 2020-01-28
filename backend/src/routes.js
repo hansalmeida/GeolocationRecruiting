@@ -11,6 +11,7 @@ const route = Router()
  * request.params (localhost/:id/ == localhost/1/)
  * request.body usually info sent from a <form>
  */
+route.get("/devs", DevController.index)
 route.post("/devs", DevController.store)
 
 module.exports = route

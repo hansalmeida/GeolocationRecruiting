@@ -1,7 +1,21 @@
 const axios = require("axios")
 const Dev = require("../models/Dev")
 
+/**
+ * Rest has up to 5 methods:
+ * Index (list all Devs)
+ * Show (list one Dev)
+ * Store (stores a new Dev)
+ * Update (update an existing Dev's information)
+ * Destroy (deletes that Dev from the database)
+ */
+
 module.exports = {
+  async index(request, response) {
+    const devs = await Dev.find()
+
+    return response.json(devs)
+  },
   async store(request, response) {
     const { githubUsername, techs, latitude, longitude } = request.body
 
