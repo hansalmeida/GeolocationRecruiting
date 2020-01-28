@@ -1,5 +1,6 @@
 const { Router } = require("express")
 const DevController = require("./controllers/DevController")
+const SearchController = require("./controllers/SearchController")
 
 const route = Router()
 
@@ -13,5 +14,7 @@ const route = Router()
  */
 route.get("/devs", DevController.index)
 route.post("/devs", DevController.store)
+
+route.get("/search", SearchController.index)
 
 module.exports = route
