@@ -45,7 +45,7 @@ module.exports = {
       dev = await Dev.create({
         githubUsername,
         name,
-        avatar_url,
+        avatarUrl: avatar_url,
         bio,
         techs: techsArray,
         location

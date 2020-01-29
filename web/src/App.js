@@ -54,6 +54,8 @@ export default function App() {
     })
     setGithubUsername("")
     setTechs("")
+
+    setDevs([...devs, response.data])
   }
 
   return (
@@ -111,62 +113,21 @@ export default function App() {
 
       <main>
         <ul>
-          <li className="dev-item">
-            <header>
-              <img
-                src="https://avatars3.githubusercontent.com/u/42522040?s=460&v=4"
-                alt="Hans Almeida"
-              />
-              <div className="user-info">
-                <strong>Hans Almeida</strong>
-                <span>ReactJS, React Native, Node.js</span>
-              </div>
-            </header>
-            <p>A nice guy.</p>
-            <a href="https://github.com/Snahier">Acessar página no Github</a>
-          </li>
-          <li className="dev-item">
-            <header>
-              <img
-                src="https://avatars3.githubusercontent.com/u/42522040?s=460&v=4"
-                alt="Hans Almeida"
-              />
-              <div className="user-info">
-                <strong>Hans Almeida</strong>
-                <span>ReactJS, React Native, Node.js</span>
-              </div>
-            </header>
-            <p>A nice guy.</p>
-            <a href="https://github.com/Snahier">Acessar página no Github</a>
-          </li>
-          <li className="dev-item">
-            <header>
-              <img
-                src="https://avatars3.githubusercontent.com/u/42522040?s=460&v=4"
-                alt="Hans Almeida"
-              />
-              <div className="user-info">
-                <strong>Hans Almeida</strong>
-                <span>ReactJS, React Native, Node.js</span>
-              </div>
-            </header>
-            <p>A nice guy.</p>
-            <a href="https://github.com/Snahier">Acessar página no Github</a>
-          </li>
-          <li className="dev-item">
-            <header>
-              <img
-                src="https://avatars3.githubusercontent.com/u/42522040?s=460&v=4"
-                alt="Hans Almeida"
-              />
-              <div className="user-info">
-                <strong>Hans Almeida</strong>
-                <span>ReactJS, React Native, Node.js</span>
-              </div>
-            </header>
-            <p>A nice guy.</p>
-            <a href="https://github.com/Snahier">Acessar página no Github</a>
-          </li>
+          {devs.map(dev => (
+            <li key={dev._id} className="dev-item">
+              <header>
+                <img src={dev.avatarUrl} alt={dev.name} />
+                <div className="user-info">
+                  <strong>{dev.name}</strong>
+                  <span>{dev.techs.join(", ")}</span>
+                </div>
+              </header>
+              <p>{dev.bio}</p>
+              <a href={`https://github.com/${dev.github_username}`}>
+                Acessar página no Github
+              </a>
+            </li>
+          ))}
         </ul>
       </main>
     </div>
