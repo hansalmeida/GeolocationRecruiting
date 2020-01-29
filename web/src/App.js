@@ -5,6 +5,7 @@ import "./global.scss"
 import "./App.scss"
 import "./Sidebar.scss"
 import "./Main.scss"
+import DevItem from "./components/DevItem"
 
 export default function App() {
   const [devs, setDevs] = useState([])
@@ -114,19 +115,7 @@ export default function App() {
       <main>
         <ul>
           {devs.map(dev => (
-            <li key={dev._id} className="dev-item">
-              <header>
-                <img src={dev.avatarUrl} alt={dev.name} />
-                <div className="user-info">
-                  <strong>{dev.name}</strong>
-                  <span>{dev.techs.join(", ")}</span>
-                </div>
-              </header>
-              <p>{dev.bio}</p>
-              <a href={`https://github.com/${dev.github_username}`}>
-                Acessar página no Github
-              </a>
-            </li>
+            <DevItem key={dev._id} dev={dev} />
           ))}
         </ul>
       </main>
