@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import api from "./services/api"
 
 import "./global.scss"
 import "./App.scss"
@@ -6,11 +7,16 @@ import "./Sidebar.scss"
 import "./Main.scss"
 
 export default function App() {
+  const [devs, setDevs] = useState([])
+
   const [githubUsername, setGithubUsername] = useState("")
   const [techs, setTechs] = useState("")
   const [latitude, setLatitude] = useState("")
   const [longitude, setLongitude] = useState("")
 
+  /**
+   * Gets the user geolocation
+   */
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       position => {
@@ -27,8 +33,27 @@ export default function App() {
     )
   }, [])
 
+  useEffect(() => {
+    async function loadDevs() {
+      const response = await api.get("/devs")
+      setDevs(response.data)
+    }
+    loadDevs()
+  }, [])
+
+  /**
+   * Handles the Dev registry form
+   */
   async function handleAddDev(e) {
     e.preventDefault()
+    const response = await api.post("/devs", {
+      githubUsername,
+      techs,
+      latitude,
+      longitude
+    })
+    setGithubUsername("")
+    setTechs("")
   }
 
   return (
