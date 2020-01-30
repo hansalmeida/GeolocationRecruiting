@@ -1,6 +1,7 @@
 const axios = require("axios")
 const Dev = require("../models/Dev")
 const parseStringAsArray = require("../utils/parseStringAsArray")
+const { findConnections, sendMessage } = require("../websocket")
 
 /**
  * Rest has up to 5 methods:
@@ -50,6 +51,17 @@ module.exports = {
         techs: techsArray,
         location
       })
+
+      /**
+       * Filter Websocket
+       * Looks for connections that are at 10km max distance
+       * Looks for at least one tech filtered
+       */
+      const sendSocketMessageTo = findConnections(
+        { latitude, longitude },
+        techsArray
+      )
+      sendMessage(sendSocketMessageTo, "newDev", dev)
     }
 
     return response.json(dev)
